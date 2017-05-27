@@ -74,7 +74,7 @@ function getChar(ch) {
     Accent every character.
 */
 function accenter(str) {
-    var l = str.trim().length;
+    var l = str.length;
     var accented = [];//To avoid creating multiple strings we will add all characters to an array and join it.
 
     for (var i=0; i < l; i++)
@@ -90,7 +90,7 @@ function accenter(str) {
     Add 30% to the width of the string.  Pad with [numeric values[
 */
 function pad(str) {
-	var len = Math.ceil(str.length/3); //Get 30% of string length
+	var len = Math.ceil(str.length/3) -4; //Get 30% of string length
 	var front = '[';
 	var back = ']';
 
@@ -126,7 +126,7 @@ function recursiveReplace(node) {
     { //This is a text node so lets process it.
     	if(node.nodeValue.trim().length > 1) 
     	{
-    		var st = node.nodeValue;
+    		var st = node.nodeValue.trim();
     		if	(options['accent']) 
             {
     			st = accenter(st);
@@ -139,7 +139,7 @@ function recursiveReplace(node) {
             {
     			st = pad(st);
     		}
-        	node.nodeValue = "[[" + st + "]]";
+        	node.nodeValue = st;
         }
     } 
     else if (node.nodeType == 1 && node.nodeName != 'SCRIPT' && node.nodeName != 'STYLE') 
